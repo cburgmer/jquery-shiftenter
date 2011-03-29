@@ -1,0 +1,23 @@
+span.shiftenter-wrap {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+span.shiftenter-wrap > textarea {
+    margin-bottom: 0;
+}
+span.shiftenter-wrap > span.shiftenter-text {
+    font-size: 0.8em;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    z-index: 1000000;
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+}
+span.shiftenter-wrap.shiftenter > span.shiftenter-text {
+    display: inline-block;
+}
+span.shiftenter-wrap.shiftenterInactive > span.shiftenter-text {
+    display: none;
+}

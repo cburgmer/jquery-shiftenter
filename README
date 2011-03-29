@@ -1,0 +1,32 @@
+ShiftEnter is a jQuery plugin that makes it easy to allow submitting a form
+with textareas using a simple press on 'Enter'. Line breaks (newlines) in
+these input fields can then be achieved by pressing 'Shift+Enter'. Additionally
+a hint is shown.
+
+Usage:
+
+Just attach jquery.shiftenter.js to your textareas to use this feature:
+
+  $(document).ready(function(){
+      $('textarea').shiftenter();
+  });
+
+See example.html for an example usage.
+
+
+Settings:
+
+  $('textarea').shiftenter({
+      focusClass: 'shiftenter',             /* CSS class used on focus */
+      inactiveClass: 'shiftenterInactive',  /* CSS class used when no focus */
+      caption: 'Shift+Enter for line break' /* caption shown */
+  });
+
+You can adjust the style in jquery.shiftenter.css
+
+
+Licensed under the MIT
+
+Report issues to https://github.com/cburgmer/jquery.shiftenter.js/issues
+
+Contact me under Christoph Burgmer (christoph -[at]- nwebs [*dot*] de)
