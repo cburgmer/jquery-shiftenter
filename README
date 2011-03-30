@@ -5,7 +5,8 @@ a hint is shown.
 
 Usage:
 
-Just attach jquery.shiftenter.js to your textareas to use this feature:
+To use this plug-in just add jquery.shiftenter.js and jquery.shiftenter.css to
+your document and attach it to your textareas:
 
   $(document).ready(function(){
       $('textarea').shiftenter();
@@ -25,8 +26,8 @@ Settings:
 You can adjust the style in jquery.shiftenter.css
 
 
-Licensed under the MIT
+Licensed under the MIT-License
 
-Report issues to https://github.com/cburgmer/jquery.shiftenter.js/issues
+Report issues to https://github.com/cburgmer/jquery-shiftenter/issues
 
 Contact me under Christoph Burgmer (christoph -[at]- nwebs [*dot*] de)

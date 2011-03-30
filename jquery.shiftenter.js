@@ -8,7 +8,7 @@
  * Additionally a hint is shown.
  *
  * For usage and examples, visit:
- * http://cburgmer.github.com/jquery.shiftenter.js
+ * http://cburgmer.github.com/jquery-shiftenter
  *
  * Settings:
  * 
