@@ -20,7 +20,7 @@ Settings:
   $('textarea').shiftenter({
       focusClass: 'shiftenter',             /* CSS class used on focus */
       inactiveClass: 'shiftenterInactive',  /* CSS class used when no focus */
-      caption: 'Shift+Enter for line break' /* caption shown */
+      hint: 'Shift+Enter for line break'    /* hint shown */
   });
 
 You can adjust the style in jquery.shiftenter.css

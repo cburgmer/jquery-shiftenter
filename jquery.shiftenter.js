@@ -15,7 +15,7 @@
  * $('textarea').shiftenter({
  *     focusClass: 'shiftenter',
  *     inactiveClass: 'shiftenterInactive',
- *     caption: 'Shift+Enter for line break'
+ *     hint: 'Shift+Enter for line break'
  * });
  * 
  * Licensed under the MIT:
@@ -29,7 +29,7 @@
             settings: {
                 focusClass: 'shiftenter',
                 inactiveClass: 'shiftenterInactive',
-                caption: 'Shift+Enter for line break'
+                hint: 'Shift+Enter for line break'
             },
             debug: false,
             log: function(msg){
@@ -59,14 +59,14 @@
                 return;
             }
 
-            // Wrap so we can apply the caption
-            if (opts.caption) {
-                $.shiftenter.log('Registered caption');
+            // Wrap so we can apply the hint
+            if (opts.hint) {
+                $.shiftenter.log('Registered hint');
                 $el.wrap('<div class="shiftenter-wrap ' + opts.inactiveClass + '" />');
-                $el.after('<span class="shiftenter-text">' + opts.caption + '</span>');
+                $el.after('<span class="shiftenter-text">' + opts.hint + '</span>');
             }
 
-            // Show & Hide caption
+            // Show & Hide hint
             $el.bind('focus.shiftenter', function(){
                 $.shiftenter.log('Gained focus');
                 $(this).parent().removeClass(opts.inactiveClass).addClass(opts.focusClass);
