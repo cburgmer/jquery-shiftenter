@@ -62,7 +62,7 @@
             // Wrap so we can apply the caption
             if (opts.caption) {
                 $.shiftenter.log('Registered caption');
-                $el.wrap('<span class="shiftenter-wrap ' + opts.inactiveClass + '" />');
+                $el.wrap('<div class="shiftenter-wrap ' + opts.inactiveClass + '" />');
                 $el.after('<span class="shiftenter-text">' + opts.caption + '</span>');
             }
 
