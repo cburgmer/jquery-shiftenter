@@ -44,8 +44,8 @@ $(document).ready(function(){
 
 <h2>Example</h2>
 
-<form onsubmit="alert('submit'); return false;">
-    <textarea style="width: 30em; height: 5em;">Click me</textarea>
+<form action="" onsubmit="alert('submit'); return false;">
+    <textarea rows="3" cols="30" style="width: 30em; height: 5em;">Click me</textarea>
 </form>
 
 <script type="text/javascript" charset="utf-8">
@@ -62,7 +62,7 @@ $(document).ready(function(){
 <div style="display: none;">
 <pre>
 &lt;form onsubmit="alert('submit'); return false;"&gt;
-    &lt;textarea style="width: 30em; height: 5em;"&gt;Click me&lt;/textarea&gt;
+    &lt;textarea rows="3" cols="30" style="width: 30em; height: 5em;"&gt;Click me&lt;/textarea&gt;
 &lt;/form&gt;
 
 &lt;script type="text/javascript" charset="utf-8"&gt;
@@ -80,7 +80,7 @@ $(document).ready(function(){
 $('textarea').shiftenter({
     focusClass: 'shiftenter',             /* CSS class used on focus */
     inactiveClass: 'shiftenterInactive',  /* CSS class used when no focus */
-    caption: 'Shift+Enter for line break' /* caption shown */
+    hint: 'Shift+Enter for line break'    /* hint shown */
 });
 </pre>
 
@@ -90,7 +90,7 @@ $('textarea').shiftenter({
 
 <p>Licensed under the MIT-License</p>
 
-<p>Report issues to <a href="http://github.com/cburgmer/jquery-shiftenter/issues">http://github.com/cburgmer/jquery-shiftenter/issues</a>
+<p>Report issues to <a href="http://github.com/cburgmer/jquery-shiftenter/issues">http://github.com/cburgmer/jquery-shiftenter/issues</a></p>
 
 <p>Contact me under Christoph Burgmer (christoph -[at]- nwebs [*dot*] de)</p>
 
