@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://github.com/cburgmer/jquery-shiftenter/raw/master/jquery.shiftenter.js"></script>
+<link href="http://github.com/cburgmer/jquery-shiftenter/raw/master/jquery.shiftenter.css" rel="stylesheet" type="text/css" />
+<title>jquery-shiftenter</title>
+<style type="text/css">
+<!--
+body { font-family: Verdana,Arial,sans-serif; }
+h1 { font-size: 1.6em; }
+pre { background-color: #eef; padding: 0.5em 4em 0.5em 4em; }
+#content { padding: 1em 10em 3.5em 10em; }
+#footer { padding: 3em 10em 0 10em; }
+
+html, body, #container { height: 100%; margin: 0; padding: 0; }
+body > #container { height: auto; min-height: 100%; }
+#footer { clear: both; position: relative; z-index: 10; height: 3.5em; margin-top: -3.5em; }
+-->
+</style>
+</head>
+<body>
+<div id="container">
+<div id="content">
+<a href="http://github.com/cburgmer/jquery-shiftenter"><img src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" style="position: absolute; top: 0; right: 0; border: 0;" alt="Fork me on GitHub" /></a>
+<h1>jquery-shiftenter, allows submit on 'Enter' in textareas and line breaks via 'Shift'+'Enter'</h1>
+
+<p>jquery-shiftenter is a jQuery plugin that makes it easy to allow submitting a form
+with textareas using a simple press on 'Enter'. Line breaks (newlines) in
+these input fields can then be achieved by pressing 'Shift+Enter'. Additionally
+a hint is shown.
+</p>
+
+<h2>Usage</h2>
+
+<p>To use this plug-in just add <code>jquery.shiftenter.js</code> and <code>jquery.shiftenter.css</code> to your document and attach it to your textareas:</p>
+
+<pre>
+$(document).ready(function(){
+    $('textarea').shiftenter();
+});
+</pre>
+
+<h2>Example</h2>
+
+<form onsubmit="alert('submit'); return false;">
+    <textarea style="width: 30em; height: 5em;">Click me</textarea>
+</form>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+    $('textarea').shiftenter();
+});
+</script>
+
+<p>Click into the textarea and press <em>Enter</em> or <em>Shift+Enter</em>.</p>
+
+<div id="example-code">
+<div><button onclick="$('#example-code div').toggle(); return false">Show example code &gt;&gt;&gt;</button></div>
+<div style="display: none;"><button onclick="$('#example-code div').toggle(); return false">&lt;&lt;&lt; Hide example code</button></div>
+<div style="display: none;">
+<pre>
+&lt;form onsubmit="alert('submit'); return false;"&gt;
+    &lt;textarea style="width: 30em; height: 5em;"&gt;Click me&lt;/textarea&gt;
+&lt;/form&gt;
+
+&lt;script type="text/javascript" charset="utf-8"&gt;
+$(document).ready(function(){
+    $('textarea').shiftenter();
+});
+&lt;/script&gt;
+</pre>
+</div>
+</div>
+
+<h2>Settings</h2>
+
+<pre>
+$('textarea').shiftenter({
+    focusClass: 'shiftenter',             /* CSS class used on focus */
+    inactiveClass: 'shiftenterInactive',  /* CSS class used when no focus */
+    caption: 'Shift+Enter for line break' /* caption shown */
+});
+</pre>
+
+<p>You can adjust the style in <code>jquery.shiftenter.css</code></p>
+
+<h2>License &amp; Contact</h2>
+
+<p>Licensed under the MIT-License</p>
+
+<p>Report issues to <a href="http://github.com/cburgmer/jquery-shiftenter/issues">http://github.com/cburgmer/jquery-shiftenter/issues</a>
+
+<p>Contact me under Christoph Burgmer (christoph -[at]- nwebs [*dot*] de)</p>
+
+</div>
+</div>
+<div id="footer"><div id="footercontent">
+<strong>jquery-shiftenter</strong> is <a href="http://github.com/cburgmer/jquery-shiftenter/blob/master/LICENSE">free and open source software</a> and is available from <a href="http://github.com/cburgmer/jquery-shiftenter">Github</a>.
+<span style="float: right;"><a href="http://validator.w3.org/check?uri=referer"><img style="border: 0pt none;" src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" height="31" width="88"/></a></span>
+</div></div>
+<script type="text/javascript">
+//<![CDATA[
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6236243-11']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+//]]>
+</script>
+</body></html>
