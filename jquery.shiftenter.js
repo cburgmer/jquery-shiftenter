@@ -62,19 +62,21 @@
             // Wrap so we can apply the hint
             if (opts.hint) {
                 $.shiftenter.log('Registered hint');
-                $el.wrap('<div class="shiftenter-wrap ' + opts.inactiveClass + '" />');
+                var width = $el.css("width");
+                $el.wrap('<div class="shiftenter-wrap ' + opts.inactiveClass + '" style="width: ' + width + ';"/>');
                 $el.after('<span class="shiftenter-text">' + opts.hint + '</span>');
-            }
 
-            // Show & Hide hint
-            $el.bind('focus.shiftenter', function(){
-                $.shiftenter.log('Gained focus');
-                $(this).parent().removeClass(opts.inactiveClass).addClass(opts.focusClass);
-            });
-            $el.bind('blur.shiftenter', function(){
-                $.shiftenter.log('Lost focus');
-                $(this).parent().removeClass(opts.focusClass).addClass(opts.inactiveClass);
-            });
+                // Show & Hide hint
+                $el.bind('focus.shiftenter', function(){
+                    $.shiftenter.log('Gained focus');
+                    $(this).parent().removeClass(opts.inactiveClass).addClass(opts.focusClass);
+                });
+                $el.bind('blur.shiftenter', function(){
+                    $.shiftenter.log('Lost focus');
+                    $(this).parent().removeClass(opts.focusClass).addClass(opts.inactiveClass);
+                });
+
+            }
 
             // Catch return key without shift to submit form
             $el.bind('keydown.shiftenter', function(event) {
