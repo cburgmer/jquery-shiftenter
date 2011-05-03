@@ -40,7 +40,14 @@ a hint is shown.
 
 <h2>Usage</h2>
 
-<p>To use this plug-in just add <code>jquery.shiftenter.js</code> and <code>jquery.shiftenter.css</code> to your document and attach it to your textareas:</p>
+<p>To use this plug-in just add <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.2/jquery.shiftenter.js"><code>jquery.shiftenter.js</code></a> and <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.2/jquery.shiftenter.css"><code>jquery.shiftenter.css</code></a> to the <code>&lt;head&gt;</code> of your document:</p>
+
+<pre>
+&lt;script type="text/javascript" src="jquery.shiftenter.js"&gt;&lt;/script&gt;
+&lt;link href="jquery.shiftenter.css" rel="stylesheet" type="text/css" /&gt;
+</pre>
+
+<p>Then attach it to your textareas:</p>
 
 <pre>
 $(document).ready(function() {
@@ -92,13 +99,20 @@ $('textarea').shiftenter({
 
 <p>You can adjust the style in <code>jquery.shiftenter.css</code></p>
 
-<h2>Dependencies</h2>
+<h2>Optional dependencies</h2>
 
 <ul>
     <li>
     <a href="http://benalman.com/projects/jquery-resize-plugin/"><code>jquery-resize</code></a>
     to adjust the hint text on textarea resizes (especially for webkit browsers).
     </li>
+</ul>
+
+<h2>Changelog</h2>
+
+<ul>
+<li>0.0.2: React to textarea resizes and fix position of hint</li>
+<li>0.0.1: Initial release</li>
 </ul>
 
 <h2>License &amp; Contact</h2>
