@@ -17,6 +17,12 @@
  *     inactiveClass: 'shiftenterInactive',
  *     hint: 'Shift+Enter for line break'
  * });
+ *
+ * Dependencies:
+ *
+ *   - needs jquery-resize (http://benalman.com/projects/jquery-resize-plugin/)
+ *     to adjust the hint text on textarea resizes (especially for webkit
+ *     browsers)
  * 
  * Licensed under the MIT:
  * http://www.opensource.org/licenses/mit-license.php
@@ -63,17 +69,27 @@
             if (opts.hint) {
                 $.shiftenter.log('Registered hint');
                 var width = $el.css("width");
-                $el.wrap('<div class="shiftenter-wrap ' + opts.inactiveClass + '" style="width: ' + width + ';"/>');
-                $el.after('<span class="shiftenter-text">' + opts.hint + '</span>');
+                $el.wrap('<div class="shiftenter-wrap ' + opts.inactiveClass + '"/>')
+                   .after('<span class="shiftenter-text">' + opts.hint + '</span>');
+
+                // Adjust wrap to textarea style
+                var $wrap = $el.parent();
+                $wrap.width($el.outerWidth())
+                     .height($el.outerHeight());
 
                 // Show & Hide hint
                 $el.bind('focus.shiftenter', function(){
                     $.shiftenter.log('Gained focus');
-                    $(this).parent().removeClass(opts.inactiveClass).addClass(opts.focusClass);
+                    $wrap.removeClass(opts.inactiveClass).addClass(opts.focusClass);
                 });
                 $el.bind('blur.shiftenter', function(){
                     $.shiftenter.log('Lost focus');
-                    $(this).parent().removeClass(opts.focusClass).addClass(opts.inactiveClass);
+                    $wrap.removeClass(opts.focusClass).addClass(opts.inactiveClass);
+                });
+                // Resize wrap (needs jquery-resize)
+                $el.bind('resize', function(){
+                    $wrap.width($el.outerWidth())
+                    $wrap.height($el.outerHeight())
                 });
 
             }
