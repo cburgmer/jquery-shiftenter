@@ -26,6 +26,12 @@ Settings:
 You can adjust the style in jquery.shiftenter.css
 
 
+Optional dependencies:
+
+  * jquery-resize (http://benalman.com/projects/jquery-resize-plugin/) to
+    adjust the hint text on textarea resizes (especially for webkit browsers).
+
+
 Licensed under the MIT-License
 
 Report issues to https://github.com/cburgmer/jquery-shiftenter/issues

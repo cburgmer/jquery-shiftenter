@@ -18,7 +18,7 @@
  *     hint: 'Shift+Enter for line break'
  * });
  *
- * Dependencies:
+ * Optional dependencies:
  *
  *   - needs jquery-resize (http://benalman.com/projects/jquery-resize-plugin/)
  *     to adjust the hint text on textarea resizes (especially for webkit
