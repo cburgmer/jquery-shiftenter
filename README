@@ -32,6 +32,11 @@ Optional dependencies:
     adjust the hint text on textarea resizes (especially for webkit browsers).
 
 
+Unit tests:
+
+Point your browser to test/index.html to start the QUnit tests
+
+
 Licensed under the MIT-License
 
 Report issues to https://github.com/cburgmer/jquery-shiftenter/issues
