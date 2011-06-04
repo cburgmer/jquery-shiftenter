@@ -3,9 +3,10 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-<script type="text/javascript" src="http://github.com/cburgmer/jquery-shiftenter/raw/master/jquery.shiftenter.js"></script>
-<script type="text/javascript" src="lib/jquery.ba-resize.js"></script>
-<link href="http://github.com/cburgmer/jquery-shiftenter/raw/master/jquery.shiftenter.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://github.com/cburgmer/jquery-shiftenter/raw/v0.0.3/jquery.shiftenter.js"></script>
+<!-- <script type="text/javascript" src="lib/jquery.ba-resize.js"></script> -->
+<script type="text/javascript" src="lib/jquery.elastic.source.js"></script>
+<link href="http://github.com/cburgmer/jquery-shiftenter/raw/v0.0.3/jquery.shiftenter.css" rel="stylesheet" type="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
@@ -40,7 +41,7 @@ a hint is shown. <a href="test.html">Unit tests</a> are provided.
 
 <h2>Usage</h2>
 
-<p>To use this plug-in just add <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.2/jquery.shiftenter.js"><code>jquery.shiftenter.js</code></a> and <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.2/jquery.shiftenter.css"><code>jquery.shiftenter.css</code></a> to the <code>&lt;head&gt;</code> of your document:</p>
+<p>To use this plug-in just add <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.3/jquery.shiftenter.js"><code>jquery.shiftenter.js</code></a> and <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.3/jquery.shiftenter.css"><code>jquery.shiftenter.css</code></a> to the <code>&lt;head&gt;</code> of your document:</p>
 
 <pre>
 &lt;script type="text/javascript" src="jquery.shiftenter.js"&gt;&lt;/script&gt;
@@ -55,27 +56,27 @@ $(document).ready(function() {
 });
 </pre>
 
-<h2>Example</h2>
+<div id="simpleexample">
+    <h2>Simple example</h2>
 
-<form action="" onsubmit="alert('submit'); return false;">
-    <textarea rows="3" cols="30" style="width: 30em; height: 5em;">Click me</textarea>
-</form>
+    <form action="" onsubmit="alert('submit'); return false;">
+        <textarea rows="3" cols="30" style="width: 30em; height: 5em;">Click me</textarea>
+    </form>
 
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function() {
-    $('textarea').shiftenter();
-});
-</script>
+    <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $('textarea').shiftenter();
+    });
+    </script>
 
-<p>Click into the textarea and press <em>Enter</em> or <em>Shift+Enter</em>.</p>
+    <p>Click into the textarea and press <em>Enter</em> or <em>Shift+Enter</em>.</p>
 
-<div id="example-code">
-<div><button onclick="$('#example-code div').toggle(); return false">Show example code &gt;&gt;&gt;</button></div>
-<div style="display: none;"><button onclick="$('#example-code div').toggle(); return false">&lt;&lt;&lt; Hide example code</button></div>
-<div style="display: none;">
-<pre>
+    <div class="example-code">
+    <div><button onclick="$('#simpleexample .example-code div').toggle(); return false">Show example code &gt;&gt;&gt;</button></div>
+    <div style="display: none;">
+        <pre>
 &lt;form onsubmit="alert('submit'); return false;"&gt;
-    &lt;textarea rows="3" cols="30" style="width: 30em; height: 5em;"&gt;Click me&lt;/textarea&gt;
+    &lt;textarea class="simple" rows="3" cols="30" style="width: 30em; height: 5em;"&gt;Click me&lt;/textarea&gt;
 &lt;/form&gt;
 
 &lt;script type="text/javascript" charset="utf-8"&gt;
@@ -83,8 +84,44 @@ $(document).ready(function() {
     $('textarea').shiftenter();
 });
 &lt;/script&gt;
-</pre>
+        </pre>
+    </div>
+    <div style="display: none;"><button onclick="$('#simpleexample .example-code div').toggle(); return false">&lt;&lt;&lt; Hide example code</button></div>
+    </div>
 </div>
+
+<div id="autogrowexample">
+    <h2>Example with "autogrow"</h2>
+
+    <form action="" onsubmit="alert('submit'); return false;">
+        <textarea rows="1" cols="30" style="width: 30em;">Click me</textarea>
+    </form>
+
+    <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $('textarea').elastic().shiftenter();
+    });
+    </script>
+
+    <p>Click into the textarea and press <em>Enter</em> or <em>Shift+Enter</em>. The textarea should automatically resize.</p>
+
+    <div class="example-code">
+    <div><button onclick="$('#autogrowexample .example-code div').toggle(); return false">Show example code &gt;&gt;&gt;</button></div>
+    <div style="display: none;">
+        <pre>
+&lt;form onsubmit="alert('submit'); return false;"&gt;
+    &lt;textarea rows="1" cols="30" style="width: 30em;"&gt;Click me&lt;/textarea&gt;
+&lt;/form&gt;
+
+&lt;script type="text/javascript" charset="utf-8"&gt;
+$(document).ready(function() {
+    $('textarea').elastic().shiftenter();
+});
+&lt;/script&gt;
+        </pre>
+    </div>
+    <div style="display: none;"><button onclick="$('#autogrowexample .example-code div').toggle(); return false">&lt;&lt;&lt; Hide example code</button></div>
+    </div>
 </div>
 
 <h2>Settings</h2>
@@ -93,24 +130,30 @@ $(document).ready(function() {
 $('textarea').shiftenter({
     focusClass: 'shiftenter',             /* CSS class used on focus */
     inactiveClass: 'shiftenterInactive',  /* CSS class used when no focus */
-    hint: 'Shift+Enter for line break'    /* hint shown */
+    hint: 'Shift+Enter for line break',   /* hint shown */
+    pseudoPadding: '0 10'                 /* padding (bottom, right) of hint text */
 });
 </pre>
 
 <p>You can adjust the style in <code>jquery.shiftenter.css</code></p>
 
-<h2>Optional dependencies</h2>
+<h2>Other things you might want to use along with jquery-shiftenter</h2>
 
 <ul>
     <li>
+    <a href="http://unwrongest.com/projects/elastic/"><code>elastic</code></a>
+    for growing and shrinking your content (see example above).
+    </li>
+    <li>
     <a href="http://benalman.com/projects/jquery-resize-plugin/"><code>jquery-resize</code></a>
-    to adjust the hint text on textarea resizes (especially for webkit browsers).
+    if you plan to do some special resizing on the textarea.
     </li>
 </ul>
 
 <h2>Changelog</h2>
 
 <ul>
+<li>0.0.3: Change the way how the hint is positioned and improve resize handling.</li>
 <li>0.0.2: React to textarea resizes and fix position of hint</li>
 <li>0.0.1: Initial release</li>
 </ul>
