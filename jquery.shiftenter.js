@@ -36,6 +36,7 @@
                 focusClass: 'shiftenter',
                 inactiveClass: 'shiftenterInactive',
                 hint: 'Shift+Enter for line break',
+                metaKey: 'shift',     // Meta key that triggers a line-break, allowed values: 'shift', 'ctrl'
                 pseudoPadding: '0 10' // Pseudo-padding to work around webkit/firefox4 resize handler being hidden, follows the CSS padding style
             },
             get_padding: function(padding) {
@@ -87,9 +88,9 @@
                 return;
             }
 
-            // Wrap so we can apply the hint
+            // Add hint
             if (opts.hint) {
-                $.shiftenter.log('Registered hint');
+                $.shiftenter.log('Registering hint');
                 var $hint = $('<div class="' + opts.inactiveClass + '">' + opts.hint + '</div>').insertAfter($el),
                     reposition = function() {
                         var position = $el.position(),
@@ -135,12 +136,39 @@
 
             // Catch return key without shift to submit form
             $el.bind('keydown.shiftenter', function(event) {
-                if (event.keyCode === 13 && ! event.shiftKey) {
-                    $.shiftenter.log('Got Shift+Enter, submitting');
-                    event.preventDefault();
-                    $(this).blur();
-                    $(this).parents('form').submit();
-                    return false;
+                if (event.keyCode === 13) {
+                    var meta_key = opts.metaKey.toLowerCase();
+                    
+                    if (meta_key == 'shift' && event.shiftKey) {
+                        // Nothing to do, browser inserts a return
+                        $.shiftenter.log('Got Shift+Enter');
+
+                    } else if (meta_key == 'ctrl' && event.ctrlKey) {
+                        $.shiftenter.log('Got Ctrl+Enter');
+                        // For Ctrl+Enter we need to manually insert a return
+                        // Taken from Tim Down, http://stackoverflow.com/questions/3532313/jquery-ctrlenter-as-enter-in-text-area, CC BY-SA 3.0
+                        var val = this.value;
+                        if (typeof this.selectionStart == "number" && typeof this.selectionEnd == "number") {
+                            var start = this.selectionStart;
+                            this.value = val.slice(0, start) + "\n" + val.slice(this.selectionEnd);
+                            this.selectionStart = this.selectionEnd = start + 1;
+                        } else if (document.selection && document.selection.createRange) {
+                            this.focus();
+                            var range = document.selection.createRange();
+                            range.text = "\r\n";
+                            range.collapse(false);
+                            range.select();
+                        }
+                        return false;
+
+                    } else {
+                        $.shiftenter.log('Got Enter, submitting');
+                        // Submit form
+                        event.preventDefault();
+                        $el.blur();
+                        $el.parents('form').submit();
+                        return false;
+                    }
                 }
             });
 

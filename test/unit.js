@@ -1,3 +1,21 @@
+function simulate_keypress(on_field, bubbles, cancelable, viewArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, keyCodeArg, charCodeArg) {
+    var send_event = function (event, on_field, bubbles, cancelable, viewArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, keyCodeArg, charCodeArg) {
+        var keyEvent = document.createEvent("KeyboardEvent");
+        /*
+        if (typeof(keyEvent.initKeyboardEvent) != 'undefined') {
+            // https://bugs.webkit.org/show_bug.cgi?id=16735
+            init_event = keyEvent.initKeyboardEvent(event, bubbles, cancelable, viewArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, keyCodeArg, charCodeArg);
+        } else { */
+            init_event = keyEvent.initKeyEvent(event, bubbles, cancelable, viewArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, keyCodeArg, charCodeArg);
+        /*}*/
+        on_field.dispatchEvent(keyEvent);
+    }
+
+    send_event("keydown", on_field, bubbles, cancelable, viewArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, keyCodeArg, charCodeArg);
+    send_event("keypress", on_field, bubbles, cancelable, viewArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, keyCodeArg, charCodeArg);
+    send_event("keyup", on_field, bubbles, cancelable, viewArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, keyCodeArg, charCodeArg);
+}
+
 $(document).ready(function(){
 
     module("Keystrokes");
@@ -31,6 +49,21 @@ $(document).ready(function(){
         });
     });
 
+    test("check ctrl+enter doesn't submit form", function() {
+        expect(0);
+
+        $('#simplefixture textarea').shiftenter({metaKey: 'ctrl'});
+
+        $('#simplefixture form').bind('submit', function() {
+            ok(false, "form mustn't get submitted");
+        });
+        $('#simplefixture textarea').trigger({
+            type: 'keydown',
+            keyCode: 13,
+            ctrlKey: true
+        });
+    });
+
     if (typeof(document.createEvent("KeyboardEvent").initKeyEvent) != 'undefined') {
         test("check shift+enter generates line breaks", function() {
             expect(1);
@@ -43,18 +76,28 @@ $(document).ready(function(){
 
             var field = $('textarea');
             field.focus();
-            var keyEvent = document.createEvent("KeyboardEvent");
-            // Shift+Enter
-            /*
-            if (typeof(keyEvent.initKeyboardEvent) != 'undefined') {
-                // https://bugs.webkit.org/show_bug.cgi?id=16735
-                keyEvent.initKeyboardEvent("keypress", true, true, null, false, false, true, false, 13, 0);
-            } else { */
-                keyEvent.initKeyEvent("keypress", true, true, null, false, false, true, false, 13, 0);
-            /*}*/
-            
             var old_text = field.val();
-            field[0].dispatchEvent(keyEvent);
+            // Shift+Enter
+            simulate_keypress(field[0], true, true, null, false, false, true, false, 13, 0);
+            
+            equal(field.val(), old_text + '\n', "should have a final line break");
+
+        });
+
+        test("check ctrl+enter generates line breaks", function() {
+            expect(1);
+
+            $('#simplefixture textarea').shiftenter({metaKey: 'ctrl'});
+
+            $('#simplefixture form').bind('submit', function() {
+                ok(false, "form mustn't get submitted");
+            });
+
+            var field = $('textarea');
+            field.focus();
+            var old_text = field.val();
+            // Ctrl+Enter
+            simulate_keypress(field[0], true, true, null, true, false, false, false, 13, 0);
             
             equal(field.val(), old_text + '\n', "should have a final line break");
 

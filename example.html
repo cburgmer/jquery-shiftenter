@@ -10,8 +10,8 @@ textarea {
 </style>
 </head>
 <body>
-<form onsubmit="alert('submit'); return false;">
-    <textarea>Click me</textarea>
+<form onsubmit="alert(this.elements[0].value); return false;">
+    <textarea name="input">Click me</textarea>
     <p>Click into the textarea and press Enter or Shift+Enter.</p>
 </form>
 <script type="text/javascript" charset="utf-8">
