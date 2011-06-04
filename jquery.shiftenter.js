@@ -35,7 +35,29 @@
             settings: {
                 focusClass: 'shiftenter',
                 inactiveClass: 'shiftenterInactive',
-                hint: 'Shift+Enter for line break'
+                hint: 'Shift+Enter for line break',
+                pseudoPadding: '0 10' // Pseudo-padding to work around webkit/firefox4 resize handler being hidden, follows the CSS padding style
+            },
+            get_padding: function(padding) {
+                // Parse padding and return right & bottom padding
+                var padding_right = 0,
+                    padding_bottom = 0;
+                if (padding) {
+                    var padding_list = padding.split(/ +/);
+                    switch (padding_list.length) {
+                        case 1:
+                            padding_bottom = padding_right = parseInt(padding_list[0]);
+                            break;
+                        case 2:
+                            padding_bottom = parseInt(padding_list[0]);
+                            padding_right = parseInt(padding_list[1]);
+                            break;
+                        default:
+                            padding_right = parseInt(padding_list[1]);
+                            padding_bottom = parseInt(padding_list[2]);
+                    }
+                }
+                return {right: padding_right, bottom: padding_bottom}
             },
             debug: false,
             log: function(msg){
@@ -70,11 +92,13 @@
                 $.shiftenter.log('Registered hint');
                 var $hint = $('<div class="' + opts.inactiveClass + '">' + opts.hint + '</div>').insertAfter($el),
                     reposition = function() {
-                        var position = $el.position();
+                        var position = $el.position(),
+                            padding = $.shiftenter.get_padding(opts.pseudoPadding);
 
-                        // Position hint, relative right bottom corner of textarea
-                        $hint.css("left", position.left + $el.outerWidth() - $hint.outerWidth())
-                            .css("top", position.top + $el.outerHeight() - $hint.outerHeight());
+                        /* Position hint, relative right bottom corner of textarea,
+                           add pseudo-padding to workaround hint text with heigher z-index hiding resize handler */
+                        $hint.css("left", position.left + $el.outerWidth() - $hint.outerWidth() - padding.right)
+                            .css("top", position.top + $el.outerHeight() - $hint.outerHeight() - padding.bottom);
                     };
                     
                 reposition();
