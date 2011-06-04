@@ -82,13 +82,28 @@
                 // Show & Hide hint
                 $el.bind('focus.shiftenter', function(){
                     $.shiftenter.log('Gained focus');
+                    // Be safe and reposition, size of textarea might have been changed
+                    reposition();
                     $hint.removeClass(opts.inactiveClass).addClass(opts.focusClass);
                 });
                 $el.bind('blur.shiftenter', function(){
                     $.shiftenter.log('Lost focus');
                     $hint.removeClass(opts.focusClass).addClass(opts.inactiveClass);
                 });
-                // Resize wrap (needs jquery-resize)
+                // Reposition hint on user grabbing the webkit/firefox4 textarea resize handler
+                $el.bind('mousedown.shiftenter', function(){
+                    $.shiftenter.log('Mousedown');
+                    // Reposition while the mouse is down, use might have clicked on resize handler
+                    $el.bind('mousemove.shiftenter', reposition);
+                });
+                $el.bind('mouseup.shiftenter', function(){
+                    $.shiftenter.log('Mouseup');
+                    // Stop repositioning
+                    $el.unbind('mousemove.shiftenter');
+                });
+                /* Resize wrap (needs jquery-resize, http://benalman.com/projects/jquery-resize-plugin/),
+                   only needed for cases where javascript-triggered resize happens while textarea has focus
+                   (e.g. autogrow) */
                 $el.bind('resize', function(){
                     reposition();
                 });
