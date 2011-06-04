@@ -110,19 +110,13 @@
                     // Be safe and reposition, size of textarea might have been changed
                     reposition();
                     $hint.removeClass(opts.inactiveClass).addClass(opts.focusClass);
+                    /* Reposition hint on user grabbing the webkit/firefox4 textarea resize handler
+                       TODO should be only bound on "mousedown", but Chrome currently doesn't issue a mousedown on the resizer */
+                    $el.bind('mousemove.shiftenter', reposition);
                 });
                 $el.bind('blur.shiftenter', function(){
                     $.shiftenter.log('Lost focus');
                     $hint.removeClass(opts.focusClass).addClass(opts.inactiveClass);
-                });
-                // Reposition hint on user grabbing the webkit/firefox4 textarea resize handler
-                $el.bind('mousedown.shiftenter', function(){
-                    $.shiftenter.log('Mousedown');
-                    // Reposition while the mouse is down, use might have clicked on resize handler
-                    $el.bind('mousemove.shiftenter', reposition);
-                });
-                $el.bind('mouseup.shiftenter', function(){
-                    $.shiftenter.log('Mouseup');
                     // Stop repositioning
                     $el.unbind('mousemove.shiftenter');
                 });
