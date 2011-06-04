@@ -8,7 +8,7 @@ Usage:
 To use this plug-in just add jquery.shiftenter.js and jquery.shiftenter.css to
 your document and attach it to your textareas:
 
-  $(document).ready(function(){
+  $(document).ready(function() {
       $('textarea').shiftenter();
   });
 
@@ -20,17 +20,19 @@ Settings:
   $('textarea').shiftenter({
       focusClass: 'shiftenter',             /* CSS class used on focus */
       inactiveClass: 'shiftenterInactive',  /* CSS class used when no focus */
-      hint: 'Shift+Enter for line break'    /* hint shown */
+      hint: 'Shift+Enter for line break',   /* hint shown */
+      pseudoPadding: '0 10'                 /* padding (bottom, right) of hint text */
   });
 
 You can adjust the style in jquery.shiftenter.css
 
 
-Optional dependencies:
+Other things you might want to use along with jquery-shiftenter:
 
-  * jquery-resize (http://benalman.com/projects/jquery-resize-plugin/) to
-    adjust the hint text on textarea resizes (especially for webkit browsers).
-
+  * elastic (http://unwrongest.com/projects/elastic/)
+    for growing and shrinking your content.
+  * jquery-resize (http://benalman.com/projects/jquery-resize-plugin/)
+    if you plan on doing some special resizing on the textarea.
 
 Unit tests:
 
