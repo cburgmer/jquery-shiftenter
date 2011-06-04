@@ -68,30 +68,30 @@
             // Wrap so we can apply the hint
             if (opts.hint) {
                 $.shiftenter.log('Registered hint');
-                var width = $el.css("width");
-                $el.wrap('<div class="shiftenter-wrap ' + opts.inactiveClass + '"/>')
-                   .after('<span class="shiftenter-text">' + opts.hint + '</span>');
+                var $hint = $('<div class="' + opts.inactiveClass + '">' + opts.hint + '</div>').insertAfter($el),
+                    reposition = function() {
+                        var position = $el.position();
 
-                // Adjust wrap to textarea style
-                var $wrap = $el.parent();
-                $wrap.width($el.outerWidth())
-                     .height($el.outerHeight());
+                        // Position hint, relative right bottom corner of textarea
+                        $hint.css("left", position.left + $el.outerWidth() - $hint.outerWidth())
+                            .css("top", position.top + $el.outerHeight() - $hint.outerHeight());
+                    };
+                    
+                reposition();
 
                 // Show & Hide hint
                 $el.bind('focus.shiftenter', function(){
                     $.shiftenter.log('Gained focus');
-                    $wrap.removeClass(opts.inactiveClass).addClass(opts.focusClass);
+                    $hint.removeClass(opts.inactiveClass).addClass(opts.focusClass);
                 });
                 $el.bind('blur.shiftenter', function(){
                     $.shiftenter.log('Lost focus');
-                    $wrap.removeClass(opts.focusClass).addClass(opts.inactiveClass);
+                    $hint.removeClass(opts.focusClass).addClass(opts.inactiveClass);
                 });
                 // Resize wrap (needs jquery-resize)
                 $el.bind('resize', function(){
-                    $wrap.width($el.outerWidth())
-                    $wrap.height($el.outerHeight())
+                    reposition();
                 });
-
             }
 
             // Catch return key without shift to submit form

@@ -1,24 +1,15 @@
-div.shiftenter-wrap {
-    margin: 0px;
-    padding: 0px;
-    position: relative;
-    display: inline-block;
-}
-div.shiftenter-wrap > span.shiftenter-text {
+div.shiftenter,
+div.shiftenterInactive {
+    position: absolute;
+    z-index: 1;
+    
     font-size: 0.8em;
     opacity: 0.4;
     filter: alpha(opacity=40);
-    z-index: 1000000;
-    position: absolute;
-    right: 4px;
-    bottom: 2px;
-    padding: 0px;
-    margin: 0px;
-    text-align: right;
 }
-div.shiftenter-wrap.shiftenter > span.shiftenter-text {
+div.shiftenter {
     display: inline-block;
 }
-div.shiftenter-wrap.shiftenterInactive > span.shiftenter-text {
+div.shiftenterInactive {
     display: none;
 }
