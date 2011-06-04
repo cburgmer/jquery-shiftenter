@@ -34,10 +34,17 @@ Other things you might want to use along with jquery-shiftenter:
   * jquery-resize (http://benalman.com/projects/jquery-resize-plugin/)
     if you plan on doing some special resizing on the textarea.
 
+
 Unit tests:
 
 Point your browser to test/index.html to start the QUnit tests
 
+
+Changelog:
+
+  * 0.0.3: Change the way how the hint is positioned and improve resize handling.
+  * 0.0.2: React to textarea resizes and fix position of hint
+  * 0.0.1: Initial release
 
 Licensed under the MIT-License
 
