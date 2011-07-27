@@ -35,13 +35,14 @@ body > #container { height: auto; min-height: 100%; }
 
 <p>jquery-shiftenter is a jQuery plugin that makes it easy to allow submitting a form
 with textareas using a simple press on 'Enter'. Line breaks (newlines) in
-these input fields can then be achieved by pressing 'Shift+Enter'. Additionally
-a hint is shown. <a href="test.html">Unit tests</a> are provided.
+these input fields can then be achieved by pressing 'Shift+Enter'
+(alternatively 'Ctrl+Enter'). Additionally a hint is shown.
+<a href="test.html">Unit tests</a> are provided.
 </p>
 
 <h2>Usage</h2>
 
-<p>To use this plug-in just add <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.3/jquery.shiftenter.js"><code>jquery.shiftenter.js</code></a> and <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.3/jquery.shiftenter.css"><code>jquery.shiftenter.css</code></a> to the <code>&lt;head&gt;</code> of your document:</p>
+<p>To use this plug-in just add <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.4/jquery.shiftenter.js"><code>jquery.shiftenter.js</code></a> and <a href="https://github.com/cburgmer/jquery-shiftenter/raw/v0.0.4/jquery.shiftenter.css"><code>jquery.shiftenter.css</code></a> to the <code>&lt;head&gt;</code> of your document:</p>
 
 <pre>
 &lt;script type="text/javascript" src="jquery.shiftenter.js"&gt;&lt;/script&gt;
@@ -153,6 +154,7 @@ $('textarea').shiftenter({
 <h2>Changelog</h2>
 
 <ul>
+<li>0.0.4: Also allow CTRL instead of SHIFT, fix resize for Google Chrome</li>
 <li>0.0.3: Change the way how the hint is positioned and improve resize handling.</li>
 <li>0.0.2: React to textarea resizes and fix position of hint</li>
 <li>0.0.1: Initial release</li>
