@@ -91,8 +91,8 @@ $(document).ready(function() {
     </div>
 </div>
 
-<div id="autogrowexample">
-    <h2>Example with "autogrow"</h2>
+<div id="complexexample">
+    <h2>More complex example with "autogrow" and "Ctrl+Enter"</h2>
 
     <form action="" onsubmit="alert('submit'); return false;">
         <textarea rows="1" cols="30" style="width: 30em;">Click me</textarea>
@@ -100,14 +100,17 @@ $(document).ready(function() {
 
     <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
-        $('#autogrowexample textarea').elastic().shiftenter();
+        $('#complexexample textarea').elastic().shiftenter({
+            hint: 'Try Ctrl+Enter',
+            metaKey: 'ctrl'
+        });
     });
     </script>
 
-    <p>Click into the textarea and press <em>Enter</em> or <em>Shift+Enter</em>. The textarea should automatically resize.</p>
+    <p>The textarea automatically resizes on larger texts.</p>
 
     <div class="example-code">
-    <div><button onclick="$('#autogrowexample .example-code div').toggle(); return false">Show example code &gt;&gt;&gt;</button></div>
+    <div><button onclick="$('#complexexample .example-code div').toggle(); return false">Show example code &gt;&gt;&gt;</button></div>
     <div style="display: none;">
         <pre>
 &lt;form onsubmit="alert('submit'); return false;"&gt;
@@ -116,12 +119,15 @@ $(document).ready(function() {
 
 &lt;script type="text/javascript" charset="utf-8"&gt;
 $(document).ready(function() {
-    $('textarea').elastic().shiftenter();
+    $('textarea').elastic().shiftenter({
+        hint: 'Try Ctrl+Enter',
+        metaKey: 'ctrl'
+    });
 });
 &lt;/script&gt;
         </pre>
     </div>
-    <div style="display: none;"><button onclick="$('#autogrowexample .example-code div').toggle(); return false">&lt;&lt;&lt; Hide example code</button></div>
+    <div style="display: none;"><button onclick="$('#complexexample .example-code div').toggle(); return false">&lt;&lt;&lt; Hide example code</button></div>
     </div>
 </div>
 
@@ -132,6 +138,7 @@ $('textarea').shiftenter({
     focusClass: 'shiftenter',             /* CSS class used on focus */
     inactiveClass: 'shiftenterInactive',  /* CSS class used when no focus */
     hint: 'Shift+Enter for line break',   /* hint shown */
+    metaKey: 'shift',                     /* meta key that triggers a line-break, allowed values: 'shift', 'ctrl' */
     pseudoPadding: '0 10'                 /* padding (bottom, right) of hint text */
 });
 </pre>
