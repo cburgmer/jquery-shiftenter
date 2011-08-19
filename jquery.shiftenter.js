@@ -27,7 +27,7 @@
  * Licensed under the MIT:
  * http://www.opensource.org/licenses/mit-license.php
  *
- * Copyright (c) 2011, Christoph Burgmer (christoph -[at]- nwebs [*dot*] de)
+ * Copyright (c) 2011, Christoph Burgmer (cburgmer -[at]- ira [*dot*] uka [*dot*] de)
  */
 (function($) {
     $.extend({
