@@ -43,6 +43,7 @@ Point your browser to test/index.html to start the QUnit tests
 
 Changelog:
 
+  * MASTER: Fix test cases to work with Firefox 6.0
   * 0.0.4: Also allow for CTRL instead of SHIFT, fix resize for Google Chrome
   * 0.0.3: Change the way how the hint is positioned and improve resize handling.
   * 0.0.2: React to textarea resizes and fix position of hint

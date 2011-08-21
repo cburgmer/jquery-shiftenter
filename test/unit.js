@@ -16,6 +16,21 @@ function simulate_keypress(on_field, bubbles, cancelable, viewArg, ctrlKeyArg, a
     send_event("keyup", on_field, bubbles, cancelable, viewArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, keyCodeArg, charCodeArg);
 }
 
+/* Sets the cursor of a form element to the given position
+ * See http://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area
+ */
+function set_cursor(elem, pos) {
+    if (elem.setSelectionRange) {
+        elem.setSelectionRange(pos, pos);
+    } else if (elem.createTextRange) {
+        var range = elem.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', pos);
+        range.moveStart('character', pos);
+        range.select();
+    }
+}
+
 $(document).ready(function(){
 
     module("Keystrokes");
@@ -77,6 +92,8 @@ $(document).ready(function(){
             var field = $('textarea');
             field.focus();
             var old_text = field.val();
+            // Jump to end of string (needed as of Firefox 6.0)
+            set_cursor(field[0], old_text.length);
             // Shift+Enter
             simulate_keypress(field[0], true, true, null, false, false, true, false, 13, 0);
             
@@ -96,6 +113,8 @@ $(document).ready(function(){
             var field = $('textarea');
             field.focus();
             var old_text = field.val();
+            // Jump to end of string (needed as of Firefox 6.0)
+            set_cursor(field[0], old_text.length);
             // Ctrl+Enter
             simulate_keypress(field[0], true, true, null, true, false, false, false, 13, 0);
             
