@@ -1,11 +1,11 @@
 /*
- * shiftenter: a jQuery plugin, version: 0.0.2 (2011-05-04)
+ * shiftenter: a jQuery plugin
  * tested on jQuery v1.5.0
  *
- * ShiftEnter is a jQuery plugin that makes it easy to allow submitting a form
- * with textareas using a simple press on 'Enter'. Line breaks (newlines) in
- * these input fields can then be achieved by pressing 'Shift+Enter'.
- * Additionally a hint is shown.
+ * jquery-shiftenter is a jQuery plugin that makes it easy to allow submitting
+ * a form with textareas using a simple press on 'Enter'. Line breaks (newlines)
+ * in these input fields can then be achieved by pressing 'Shift+Enter'
+ * (alternatively 'Ctrl+Enter'). Additionally a hint is shown.
  *
  * For usage and examples, visit:
  * http://cburgmer.github.com/jquery-shiftenter
@@ -13,17 +13,13 @@
  * Settings:
  * 
  * $('textarea').shiftenter({
- *     focusClass: 'shiftenter',
- *     inactiveClass: 'shiftenterInactive',
- *     hint: 'Shift+Enter for line break'
+ *     focusClass: 'shiftenter',             // CSS class used on focus
+ *     inactiveClass: 'shiftenterInactive',  // CSS class used when no focus
+ *     hint: 'Shift+Enter for line break',   // hint shown
+ *     metaKey: 'shift',                     // meta key that triggers a line-break, allowed values: 'shift', 'ctrl'
+ *     pseudoPadding: '0 10'                 // padding (bottom, right) of hint text
  * });
  *
- * Optional dependencies:
- *
- *   - needs jquery-resize (http://benalman.com/projects/jquery-resize-plugin/)
- *     to adjust the hint text on textarea resizes (especially for webkit
- *     browsers)
- * 
  * Licensed under the MIT:
  * http://www.opensource.org/licenses/mit-license.php
  *
