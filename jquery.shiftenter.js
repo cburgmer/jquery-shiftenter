@@ -11,7 +11,7 @@
  * http://cburgmer.github.com/jquery-shiftenter
  *
  * Settings:
- * 
+ *
  * $('textarea').shiftenter({
  *     focusClass: 'shiftenter',             // CSS class used on focus
  *     inactiveClass: 'shiftenterInactive',  // CSS class used when no focus
@@ -25,7 +25,10 @@
  *
  * Copyright (c) 2011, Christoph Burgmer (cburgmer -[at]- ira [*dot*] uka [*dot*] de)
  */
-(function($) {
+/*jslint devel: false, browser: true, vars: true, indent: 4 */
+/*global jQuery */
+(function ($) {
+    "use strict";
     $.extend({
         shiftenter: {
             settings: {
@@ -35,51 +38,52 @@
                 metaKey: 'shift',     // Meta key that triggers a line-break, allowed values: 'shift', 'ctrl'
                 pseudoPadding: '0 10' // Pseudo-padding to work around webkit/firefox4 resize handler being hidden, follows the CSS padding style
             },
-            get_padding: function(padding) {
+            get_padding: function (padding) {
                 // Parse padding and return right & bottom padding
                 var padding_right = 0,
-                    padding_bottom = 0;
+                    padding_bottom = 0,
+                    padding_list = null;
                 if (padding) {
-                    var padding_list = padding.split(/ +/);
+                    padding_list = padding.split(/ +/);
                     switch (padding_list.length) {
-                        case 1:
-                            padding_bottom = padding_right = parseInt(padding_list[0]);
-                            break;
-                        case 2:
-                            padding_bottom = parseInt(padding_list[0]);
-                            padding_right = parseInt(padding_list[1]);
-                            break;
-                        default:
-                            padding_right = parseInt(padding_list[1]);
-                            padding_bottom = parseInt(padding_list[2]);
+                    case 1:
+                        padding_bottom = padding_right = parseInt(padding_list[0], 10);
+                        break;
+                    case 2:
+                        padding_bottom = parseInt(padding_list[0], 10);
+                        padding_right = parseInt(padding_list[1], 10);
+                        break;
+                    default:
+                        padding_right = parseInt(padding_list[1], 10);
+                        padding_bottom = parseInt(padding_list[2], 10);
                     }
                 }
-                return {right: padding_right, bottom: padding_bottom}
+                return {right: padding_right, bottom: padding_bottom};
             },
             debug: false,
-            log: function(msg){
-                if(!$.shiftenter.debug) return;
+            log: function (msg) {
+                if (!$.shiftenter.debug) { return; }
                 msg = "[ShiftEnter] " + msg;
                 $.shiftenter.hasFirebug ?
-                console.log(msg) :
-                $.shiftenter.hasConsoleLog ?
-                    window.console.log(msg) :
-                    alert(msg);
+                        window.console.log(msg) :
+                        $.shiftenter.hasConsoleLog ?
+                                window.console.log(msg) :
+                                window.alert(msg);
             },
-            hasFirebug: "console" in window && "firebug" in window.console,
-            hasConsoleLog: "console" in window && "log" in window.console
+            hasFirebug: window.hasOwnProperty("console") && window.console.hasOwnProperty("firebug"),
+            hasConsoleLog: window.hasOwnProperty("console") && typeof window.console.log !== "undefined"
         }
 
     });
     // plugin code
-    $.fn.shiftenter = function(opts) {
-        opts = $.extend({},$.shiftenter.settings, opts);
+    $.fn.shiftenter = function (opts) {
+        opts = $.extend({}, $.shiftenter.settings, opts);
 
-        return this.each(function() {
+        return this.each(function () {
             var $el = $(this);
 
             // Our goal only makes sense for textareas where enter does not trigger submit
-            if(!$el.is('textarea')) {
+            if (!$el.is('textarea')) {
                 $.shiftenter.log('Ignoring non-textarea element');
                 return;
             }
@@ -88,7 +92,7 @@
             if (opts.hint) {
                 $.shiftenter.log('Registering hint');
                 var $hint = $('<div class="' + opts.inactiveClass + '">' + opts.hint + '</div>').insertAfter($el),
-                    reposition = function() {
+                    reposition = function () {
                         var position = $el.position(),
                             padding = $.shiftenter.get_padding(opts.pseudoPadding);
 
@@ -97,11 +101,11 @@
                         $hint.css("left", position.left + $el.outerWidth() - $hint.outerWidth() - padding.right)
                             .css("top", position.top + $el.outerHeight() - $hint.outerHeight() - padding.bottom);
                     };
-                    
+
                 reposition();
 
                 // Show & Hide hint
-                $el.bind('focus.shiftenter', function(){
+                $el.bind('focus.shiftenter', function () {
                     $.shiftenter.log('Gained focus');
                     // Be safe and reposition, size of textarea might have been changed
                     reposition();
@@ -110,7 +114,7 @@
                        TODO should be only bound on "mousedown", but Chrome currently doesn't issue a mousedown on the resizer */
                     $el.bind('mousemove.shiftenter', reposition);
                 });
-                $el.bind('blur.shiftenter', function(){
+                $el.bind('blur.shiftenter', function () {
                     $.shiftenter.log('Lost focus');
                     $hint.removeClass(opts.focusClass).addClass(opts.inactiveClass);
                     // Stop repositioning
@@ -119,32 +123,32 @@
                 /* Resize wrap (needs jquery-resize, http://benalman.com/projects/jquery-resize-plugin/),
                    only needed for cases where javascript-triggered resize happens while textarea has focus
                    (e.g. autogrow) */
-                $el.bind('resize', function(){
+                $el.bind('resize', function () {
                     reposition();
                 });
             }
 
             // Catch return key without shift to submit form
-            $el.bind('keydown.shiftenter', function(event) {
+            $el.bind('keydown.shiftenter', function (event) {
                 if (event.keyCode === 13) {
                     var meta_key = opts.metaKey.toLowerCase();
-                    
-                    if (meta_key == 'shift' && event.shiftKey) {
+
+                    if (meta_key === 'shift' && event.shiftKey) {
                         // Nothing to do, browser inserts a return
                         $.shiftenter.log('Got Shift+Enter');
 
-                    } else if (meta_key == 'ctrl' && event.ctrlKey) {
+                    } else if (meta_key === 'ctrl' && event.ctrlKey) {
                         $.shiftenter.log('Got Ctrl+Enter');
                         // For Ctrl+Enter we need to manually insert a return
                         // Taken from Tim Down, http://stackoverflow.com/questions/3532313/jquery-ctrlenter-as-enter-in-text-area, CC BY-SA 3.0
                         var val = this.value;
-                        if (typeof this.selectionStart == "number" && typeof this.selectionEnd == "number") {
+                        if (typeof this.selectionStart === "number" && typeof this.selectionEnd === "number") {
                             var start = this.selectionStart;
                             this.value = val.slice(0, start) + "\n" + val.slice(this.selectionEnd);
                             this.selectionStart = this.selectionEnd = start + 1;
-                        } else if (document.selection && document.selection.createRange) {
+                        } else if (window.document.selection && window.document.selection.createRange) {
                             this.focus();
-                            var range = document.selection.createRange();
+                            var range = window.document.selection.createRange();
                             range.text = "\r\n";
                             range.collapse(false);
                             range.select();
@@ -164,4 +168,4 @@
 
         });
     };
-})(jQuery);
+}(jQuery));
