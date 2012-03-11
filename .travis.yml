@@ -1,6 +1,9 @@
 rvm:
   - 1.9.3
 before_script:
+  - "sudo bash test/ci/install_phantomjs > /dev/null"
   - sh -e /etc/init.d/xvfb start
 script:
   - DISPLAY=:99.0 phantomjs test/ci/run-qunit.js test/index.html
+notifications:
+  email: cburgmer@ira.uka.de
